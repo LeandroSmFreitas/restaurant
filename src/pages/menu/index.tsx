@@ -8,7 +8,7 @@ import { useMenu } from "./hooks/menu-hook"
 
 
 const MenuPage = () => {
-    const { showModal, handleCloseOrOpenModal, menu, selectMenuSection, setSelectMenuSection, selectedItem } = useMenu();
+    const { showModal, handleCloseOrOpenModal, menu, setSelectMenuSection, selectedItem } = useMenu();
     
   return (
     <>
