@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const ContainerMenuAndCart = styled.div`
     width: 1024px;
-    height: 1337px;
+    min-height: 1337px;
     background-color: #F8F9FA;
     margin-top: 6px;
     display: flex;
@@ -23,7 +23,6 @@ export const ContainerMenu = styled.div`
     padding: 0px 0px 24px 0px;
     margin: 0px 24px 0px 40px;
     background-color: #fff;
-    box-shadow: 0px 2px 14px 0px #00000024;
 `
 
 export const ContainerCard = styled.div`
@@ -33,24 +32,72 @@ export const ContainerCard = styled.div`
     display: flex;
     flex-direction: column;
     box-shadow: 0px 2px 14px 0px #00000026;
+    flex-grow: 0;
 `
 
 export const ContainerTitleCard = styled.div`
     width: 100%;
-    height: 64px;
+    min-height: 64px;
     background-color: #F8F9FA;
     border-radius: 5px 5px 0px 0px;
     display: flex;
     align-items: center;
+    box-shadow: -2px -2px 5px #00000024;
 `
 
-export const TitleCard = styled.span`
+export const TitleCart = styled.span`
     font-family: Roboto;
     font-size: 24px;
     font-weight: 500;
     line-height: 28.13px;
     letter-spacing: 0.5px;
     margin-left: 24px;
+`
+
+export const DescriptionCart = styled.span`
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+    margin-left: 24px;
+    margin-top: 24px;
+`
+
+export const ContainerTotalCard = styled.div`
+    width: 100%;
+    min-height: 58px;
+    background-color: #F8F9FA;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 2px 2px 5px #00000024;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+`
+
+export const TotalCart = styled.span`
+    font-family: SF Pro Display;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 28.64px;
+    text-align: left;
+`
+
+export const SubtotalCart = styled.span`
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+    text-align: left;
+`
+
+export const SubtotalPrice = styled.span`
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18.75px;
+    text-align: right;
 `
 
 export const ContainerMenuOptions = styled.div`
@@ -145,3 +192,4 @@ export const ContainerSections = styled.div`
     border-radius: 4px;
   }
 `;
+

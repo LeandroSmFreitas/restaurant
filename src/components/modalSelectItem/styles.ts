@@ -55,7 +55,7 @@ export const CloseButton = styled.button`
 
 export const ContainerDescription = styled.div`
     width: 100%;
-    height: 106px;
+    height: 116px;
     display: flex;
     background-color: white;
     flex-direction: column;

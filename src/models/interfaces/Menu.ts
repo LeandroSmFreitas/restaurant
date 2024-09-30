@@ -44,7 +44,7 @@ interface Modifier {
     items: ModifierItem[];
 }
 
-interface ModifierItem {
+export interface ModifierItem {
     id: number;
     name: string;
     price: number;

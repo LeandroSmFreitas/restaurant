@@ -5,10 +5,11 @@ import ArrowUp from "../../assets/arrowUp.svg"
 import MenuItem from "../../components/menuItem"
 import ModalSelectItem from "../../components/modalSelectItem"
 import { useMenu } from "./hooks/menu-hook"
+import { ItemCartToBuy } from "../../components/itemCart"
 
 
 const MenuPage = () => {
-    const { showModal, handleCloseOrOpenModal, menu, setSelectMenuSection, selectedItem } = useMenu();
+    const { showModal, handleCloseOrOpenModal, menu, setSelectMenuSection, selectedItem, itemsCart, handleAddToCart } = useMenu();
     
   return (
     <>
@@ -43,7 +44,7 @@ const MenuPage = () => {
                                     {
                                         sections?.items.map(element => {
                                             return (
-                                                <MenuItem openModal={() => handleCloseOrOpenModal(element)} item={element}/>
+                                                <MenuItem openModal={() => element.images ? handleCloseOrOpenModal(element) : handleAddToCart(element)} item={element}/>
                                             )
                                         })
                                     }
@@ -55,13 +56,35 @@ const MenuPage = () => {
                 </S.ContainerMenu>
                 <S.ContainerCard>
                     <S.ContainerTitleCard>
-                        <S.TitleCard>Carrinho</S.TitleCard>
+                        <S.TitleCart>Carrinho</S.TitleCart>
                     </S.ContainerTitleCard>
+                    {
+                        itemsCart.length === 0 ?
+                    <S.DescriptionCart>Seu carrinho esta vazio</S.DescriptionCart>
+                    :
+                        <>
+                            {
+                                itemsCart.map(element => {
+                                    return (
+                                        <ItemCartToBuy itemCart={element}/>
+                                    )
+                                })
+                            }
+                            <S.ContainerTotalCard>
+                                <S.SubtotalCart>Sub total</S.SubtotalCart>
+                                <S.SubtotalPrice>R$:{itemsCart.reduce(( acc, curr ) => acc + curr.total, 0)}</S.SubtotalPrice>
+                            </S.ContainerTotalCard>
+                            <S.ContainerTotalCard>
+                                <S.SubtotalCart>Total</S.SubtotalCart>
+                                <S.TotalCart>R$:{itemsCart.reduce(( acc, curr ) => acc + curr.total, 0)}</S.TotalCart>
+                            </S.ContainerTotalCard>
+                        </>
+                    }
                 </S.ContainerCard>
             </S.ContainerMenuAndCart>
         </S.Container>
         {
-            showModal && selectedItem && <ModalSelectItem closeModal={handleCloseOrOpenModal} item={selectedItem}/>
+            showModal && selectedItem && <ModalSelectItem closeModal={() => handleCloseOrOpenModal(selectedItem, showModal)} item={selectedItem}/>
         }
     </>
   )

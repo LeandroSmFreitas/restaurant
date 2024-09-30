@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import { getMenu } from "../../../api/services/menuService"
 import { Item, Menu, Section } from "../../../models/interfaces/Menu"
+import { useAppSelector } from "../../../store/store"
+import { useDispatch } from "react-redux"
+import { addToCart } from "../../../store/cart/reducer"
 
 
 export const useMenu = () => {
@@ -8,6 +11,8 @@ export const useMenu = () => {
     const [menu, setMenu] = useState<Menu>()
     const [selectMenuSection, setSelectMenuSection] = useState<Section>()
     const [selectedItem, setSelectedItem] = useState<Item>()
+    const itemsCart = useAppSelector((state) => state.cart.items);
+    const dispatch = useDispatch()
 
     const handleCloseOrOpenModal = (item?: Item) => {
         if(item){
@@ -19,12 +24,18 @@ export const useMenu = () => {
     useEffect(() => {
     const getMenuItems = async () => {
             const menuResponse = await getMenu()
-
-            console.log(menuResponse)
             setMenu(menuResponse)
     }
     getMenuItems()
     }, [])
+
+    const handleAddToCart = (item: Item) => {
+        dispatch(addToCart({
+            item,
+            total: item.price,
+            quantity: 1
+        }))
+    }
 
     return {
         handleCloseOrOpenModal,
@@ -32,6 +43,8 @@ export const useMenu = () => {
         menu,
         setSelectMenuSection,
         selectMenuSection,
-        selectedItem
+        selectedItem,
+        itemsCart,
+        handleAddToCart
     }
 }
