@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 const createApiInstance = (): AxiosInstance => {
   const config: AxiosRequestConfig = {
-    baseURL: import.meta.env.REACT_APP_BASE_URL,
+    baseURL: "https://cdn-dev.preoday.com/challenge",
     timeout: 60 * 1000
   };
 
