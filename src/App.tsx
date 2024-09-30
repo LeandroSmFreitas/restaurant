@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AppRoutes from './routes/AppRoutes'
 import { ToastContainer } from 'react-toastify'
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         className={'toast-wrapper'}
         position={"top-right"}
       />
+      <SpeedInsights/>
     </>
   )
 }
