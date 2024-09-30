@@ -84,7 +84,7 @@ const MenuPage = () => {
             </S.ContainerMenuAndCart>
         </S.Container>
         {
-            showModal && selectedItem && <ModalSelectItem closeModal={() => handleCloseOrOpenModal(selectedItem, showModal)} item={selectedItem}/>
+            showModal && selectedItem && <ModalSelectItem closeModal={() => handleCloseOrOpenModal(selectedItem)} item={selectedItem}/>
         }
     </>
   )
