@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 const createApiInstance = (): AxiosInstance => {
   const config: AxiosRequestConfig = {
-    baseURL: "https://crossorigin.me/https://cdn-dev.preoday.com/challenge",
+    baseURL: "/api/",
     timeout: 60 * 1000
   };
 
