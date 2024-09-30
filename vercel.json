@@ -1,8 +1,8 @@
 {
     "rewrites": [
       {
-        "source": "/api/proxy",
-        "destination": "https://api-externa.com/challenge"
+        "source": "/api/proxy/menu",
+        "destination": "https://api-externa.com/challenge/menu"
       }
     ]
   }
