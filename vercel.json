@@ -1,8 +1,8 @@
 {
     "rewrites": [
       {
-        "source": "/api/proxy/menu",
-        "destination": "https://api-externa.com/challenge/menu"
+        "source": "/api/:path*",
+        "destination": "https://cdn-dev.preoday.com/challenge/:path*"
       }
     ]
   }
