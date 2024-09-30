@@ -4,7 +4,7 @@ import * as S from "./styles"
 
 interface Props{
   openModal: () => void;
-  item: Item
+  item: Item;
 }
 
 const MenuItem = ({ openModal, item }:Props) => {

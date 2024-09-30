@@ -2,8 +2,8 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 const createApiInstance = (): AxiosInstance => {
   const config: AxiosRequestConfig = {
-    baseURL: "http://localhost:5173/api/challenge/",
-    timeout: 6000000
+    baseURL: import.meta.env.REACT_APP_BASE_URL,
+    timeout: 60 * 1000
   };
 
   const instance = axios.create(config);
