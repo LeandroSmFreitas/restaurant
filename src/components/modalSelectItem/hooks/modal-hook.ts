@@ -26,10 +26,6 @@ export const UseModal = ({ item, closeModal }: Props) => {
             total: total * quantity,
             quantity
         }))
-        closeModalItem()
-    }
-
-    const closeModalItem = () => {
         closeModal()
     }
 

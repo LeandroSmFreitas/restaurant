@@ -130,9 +130,6 @@ const MenuPage = () => {
                         <S.TitleCart>{t("basket.title")}</S.TitleCart>
                     </S.ContainerTitleCard>
                     {
-                        itemsCart.length === 0 ?
-                    <S.DescriptionCart>{t("basket.empty")}</S.DescriptionCart>
-                    :
                         <>
                             {
                                 itemsCart.map(element => {
