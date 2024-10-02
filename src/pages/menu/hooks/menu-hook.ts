@@ -9,7 +9,6 @@ import { addToCart } from "../../../store/cart/reducer"
 export const useMenu = () => {
     const [showModalItem, setShowModalItem] = useState(false)
     const [showModalBasket, setShowModalBasket] = useState(false)
-    const [showModalWithoutImage, setShowModalWithoutImage] = useState(false)
     const [menu, setMenu] = useState<Menu>()
     const [selectMenuSection, setSelectMenuSection] = useState<Section>()
     const [selectedItem, setSelectedItem] = useState<Item>()

@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { useAppSelector } from "../../../store/store";
-import { StringUtils } from "../../../utils/StringUtils";
 import { Item } from "../../../models/interfaces/Menu";
+import { useAppSelector } from "../../../store/store";
 
 interface UseMenuItem {
     item: Item;
