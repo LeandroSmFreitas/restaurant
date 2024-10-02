@@ -5,7 +5,7 @@ interface UseMenuItem {
     item: Item;
 }
 
-export const UseMenuItem = ({ item }: UseMenuItem) => {
+export const UseMenuItem = () => {
     const itemsCart = useAppSelector((state) => state.cart.items);
     
     const showValueInBasket = (name: string) => {
