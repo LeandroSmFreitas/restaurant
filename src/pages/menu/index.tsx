@@ -9,6 +9,8 @@ import { useMenu } from "./hooks/menu-hook"
 import { ItemCartToBuy } from "../../components/itemCart"
 import React from "react"
 import ModalBasket from "../../components/modalBasket"
+import { useTranslation } from "react-i18next"
+import { StringUtils } from "../../utils/StringUtils"
 
 
 const MenuPage = () => {
@@ -24,14 +26,17 @@ const MenuPage = () => {
         toggleSection, 
         openSections,
         showModalBasket,
-        handleCloseOrOpenModalBasket 
+        handleCloseOrOpenModalBasket,
+        handleSearch,
+        resultQuery,
     } = useMenu();
+    const { t } = useTranslation()
     
   return (
     <>
         <Header/>
         <S.Container>
-            <Search/>
+            <Search handleSearch={handleSearch}/>
             <S.ContainerMenuAndCart>
                 <S.ContainerMenu>
                     <S.ContainerMenuOptions>
@@ -49,14 +54,14 @@ const MenuPage = () => {
                         }
                     </S.ContainerMenuOptions>
                     <S.ContainerSections>
-                        {menu?.sections.map((section) => (
+                        {resultQuery.length === 0 ? menu?.sections.map((section) => (
                             <React.Fragment>
                                 {
                                     selectMenuSection?.name === section.name ? (
                                         <React.Fragment key={section.name}>
                                             <S.ContainerSection onClick={() => toggleSection(section.name)}>
                                                 <S.TitleSection>{section?.name}</S.TitleSection>
-                                                <S.Icon src={openSections.includes(section.name) ? ArrowUp : ArrowDown} /> {/* Muda o ícone dependendo se a seção está aberta ou fechada */}
+                                                <S.Icon src={openSections.includes(section.name) ? ArrowUp : ArrowDown} />
                                             </S.ContainerSection>
 
                                             {openSections.includes(section.name) && (
@@ -79,36 +84,54 @@ const MenuPage = () => {
                                     <React.Fragment key={section.name}>
                                         <S.ContainerSection onClick={() => toggleSection(section.name)}>
                                             <S.TitleSection>{section?.name}</S.TitleSection>
-                                            <S.Icon src={openSections.includes(section.name) ? ArrowUp : ArrowDown} /> {/* Muda o ícone dependendo se a seção está aberta ou fechada */}
+                                            <S.Icon src={openSections.includes(section.name) ? ArrowUp : ArrowDown} />
                                         </S.ContainerSection>
 
                                         {openSections.includes(section.name) && (
                                             section?.items.map((element) => (
-                                            <MenuItem
-                                                key={element.id}
-                                                openModal={() =>
-                                                element.images
-                                                    ? handleCloseOrOpenModal(element)
-                                                    : handleAddToCart(element)
+                                            <React.Fragment>
+                                                {
+                                                    element.images ?
+                                                        <MenuItem
+                                                            key={element.id}
+                                                            openModal={() => handleCloseOrOpenModal(element)}
+                                                            item={element}
+                                                        />
+                                                        :
+                                                        <MenuItem
+                                                            key={element.id}
+                                                            openModal={() => handleAddToCart(element)}
+                                                            item={element}
+                                                        />
                                                 }
-                                                item={element}
-                                            />
+                                            </React.Fragment>
                                             ))
                                         )}
                                     </React.Fragment>
                                 }
                                 
                             </React.Fragment>
-                        ))}
+                        ))
+                        :
+                            <MenuItem
+                                key={resultQuery[0].id}
+                                openModal={() =>
+                                resultQuery[0].images
+                                    ? handleCloseOrOpenModal(resultQuery[0])
+                                    : handleAddToCart(resultQuery[0])
+                                }
+                                item={resultQuery[0]}
+                            />
+                        }
                     </S.ContainerSections>
                 </S.ContainerMenu>
                 <S.ContainerCard>
                     <S.ContainerTitleCard>
-                        <S.TitleCart>Carrinho</S.TitleCart>
+                        <S.TitleCart>{t("basket.title")}</S.TitleCart>
                     </S.ContainerTitleCard>
                     {
                         itemsCart.length === 0 ?
-                    <S.DescriptionCart>Seu carrinho esta vazio</S.DescriptionCart>
+                    <S.DescriptionCart>{t("basket.empty")}</S.DescriptionCart>
                     :
                         <>
                             {
@@ -119,19 +142,19 @@ const MenuPage = () => {
                                 })
                             }
                             <S.ContainerTotalCard>
-                                <S.SubtotalCart>Sub total</S.SubtotalCart>
-                                <S.SubtotalPrice>R$:{itemsCart.reduce(( acc, curr ) => acc + curr.total, 0)}</S.SubtotalPrice>
+                                <S.SubtotalCart>{t("basket.subtotal")}</S.SubtotalCart>
+                                <S.SubtotalPrice>{StringUtils.formatCurrency(itemsCart.reduce(( acc, curr ) => acc + curr.total, 0))}</S.SubtotalPrice>
                             </S.ContainerTotalCard>
                             <S.ContainerTotalCard>
-                                <S.SubtotalCart>Total</S.SubtotalCart>
-                                <S.TotalCart>R$:{itemsCart.reduce(( acc, curr ) => acc + curr.total, 0)}</S.TotalCart>
+                                <S.SubtotalCart>{t("basket.total")}</S.SubtotalCart>
+                                <S.TotalCart>{StringUtils.formatCurrency(itemsCart.reduce(( acc, curr ) => acc + curr.total, 0))}</S.TotalCart>
                             </S.ContainerTotalCard>
                         </>
                     }
                 </S.ContainerCard>
             </S.ContainerMenuAndCart>
             <S.BasketButton onClick={() => handleCloseOrOpenModalBasket()}>
-                <S.TitleBasketButton>Your basket • {itemsCart.length} item</S.TitleBasketButton>
+                <S.TitleBasketButton>{t("basket.yourBasket")} • {itemsCart.length} item</S.TitleBasketButton>
             </S.BasketButton>
         </S.Container>
         {

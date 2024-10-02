@@ -1,8 +1,26 @@
 {
   "global": {
+    "search":{
+      "placeholder": "Procurar por item"
+    }
   },
   "header": {
+    "menu": "Menu",
+    "enter": "Entrar",
+    "contact": "Contato"
   },
-  "generic": {
+  "basket":{
+    "title": "Carrinho",
+    "empty": "Seu carrinho esta vazio",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "yourBasket": "Seu carrinho"
+  },
+  "selectItem":{
+    "size":{
+      "title": "Escolha seu tamanho",
+      "oneOption": "Selecione 1 opção"
+    },
+    "addToBasket": "Adicionar no carrinho"
   }
 }

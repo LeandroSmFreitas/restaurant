@@ -24,7 +24,7 @@ const MenuItem = ({ openModal, item }:Props) => {
           <S.Title>{item.name}</S.Title>
         </S.ContainerTitleAndValueInBasket>
         {item.description && <S.Description>{StringUtils.formatDescription(item.description)}</S.Description> }
-        <S.Value>R${item.price}</S.Value>
+        <S.Value>{StringUtils.formatCurrency(item.price)}</S.Value>
       </S.ContainerInfos>
       {item.images &&  <S.ImageItem src={item.images[0].image}/> }
     </S.Container>

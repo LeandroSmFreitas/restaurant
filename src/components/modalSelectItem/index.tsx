@@ -4,6 +4,8 @@ import PlusIcon from '../../assets/plus.svg'
 import CloseIcon from '../../assets/close.svg'
 import { Item } from '../../models/interfaces/Menu';
 import { UseModal } from './hooks/modal-hook';
+import { useTranslation } from 'react-i18next';
+import { StringUtils } from '../../utils/StringUtils';
 
 interface Props {
     closeModal: () => void;
@@ -12,17 +14,27 @@ interface Props {
 
 const ModalSelectItem = ({ closeModal, item }: Props) => {
     const { handleChooseOption, total, handleAddCart, quantity, handleChooseQuantity } = UseModal({item, closeModal})
+    const { t } = useTranslation()
   
     return (
-    <S.Container>
-        <S.ContainerModalBody>
-            <S.ContainerMenuItemImage url={item.images[0].image}>
-                <S.CloseButton onClick={closeModal}>
-                    <S.CloseIcon src={CloseIcon}/>
-                </S.CloseButton>
-            </S.ContainerMenuItemImage>
+    <S.Container withoutImage={item.images ? false : true}>
+        <S.ContainerModalBody withoutImage={item.images ? false : true}>
+            { item.images && 
+                <S.ContainerMenuItemImage url={item.images[0].image}>
+                    <S.CloseButton onClick={closeModal}>
+                        <S.CloseIcon src={CloseIcon}/>
+                    </S.CloseButton>
+                </S.ContainerMenuItemImage> 
+            }
             <S.ContainerDescription>
-                <S.TitleMenuItem>{item.name}</S.TitleMenuItem>
+                <S.Row>
+                    <S.TitleMenuItem>{item.name}</S.TitleMenuItem>
+                    { !item.images && 
+                        <S.CloseButton onClick={closeModal}>
+                            <S.CloseIcon src={CloseIcon}/>
+                        </S.CloseButton>
+                    }
+                </S.Row>
                 <S.DescriptionMenuItem>{item.description}</S.DescriptionMenuItem>
             </S.ContainerDescription>
             {
@@ -33,8 +45,8 @@ const ModalSelectItem = ({ closeModal, item }: Props) => {
                                 return (
                                     <>
                                     <S.ContainerTitleAdditional>
-                                        <S.TitleAddtional>Escolha seu tamanho</S.TitleAddtional>
-                                        <S.DescriptionAdditional>Selecione 1 opção</S.DescriptionAdditional>
+                                        <S.TitleAddtional>{t("selectItem.size.title")}</S.TitleAddtional>
+                                        <S.DescriptionAdditional>{t("selectItem.size.oneOption")}</S.DescriptionAdditional>
                                     </S.ContainerTitleAdditional>
                                     {
                                         element.items.map(element => {
@@ -42,7 +54,7 @@ const ModalSelectItem = ({ closeModal, item }: Props) => {
                                                 <S.ContainerSize>
                                                     <S.ContainerInfoSize>
                                                         <S.TitleSize>{element.name}</S.TitleSize>
-                                                        <S.ValueSize>R${element.price}</S.ValueSize>
+                                                        <S.ValueSize>{StringUtils.formatCurrency(element.price)}</S.ValueSize>
                                                     </S.ContainerInfoSize>
                                                     <S.Radio type="radio" name="meat" value={element.price} onChange={() => handleChooseOption(element, item.price)} />
                                                 </S.ContainerSize>
@@ -67,7 +79,7 @@ const ModalSelectItem = ({ closeModal, item }: Props) => {
                     </S.PlusAndDeductButton>
                 </S.ContainerIncrement>
                 <S.AddToCardButton onClick={() => handleAddCart(item)}>
-                    <S.TitleAddToCardButton>Add to Order • ${total !== 0 ? total * quantity : item.price * quantity}</S.TitleAddToCardButton>
+                    <S.TitleAddToCardButton>{t("selectItem.addToBasket")} • {total !== 0 ? StringUtils.formatCurrency(total * quantity) : StringUtils.formatCurrency(item.price * quantity)}</S.TitleAddToCardButton>
                 </S.AddToCardButton>
             </S.ContainerFooterModal>
         </S.ContainerModalBody>

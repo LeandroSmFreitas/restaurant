@@ -9,10 +9,12 @@ import { addToCart } from "../../../store/cart/reducer"
 export const useMenu = () => {
     const [showModalItem, setShowModalItem] = useState(false)
     const [showModalBasket, setShowModalBasket] = useState(false)
+    const [showModalWithoutImage, setShowModalWithoutImage] = useState(false)
     const [menu, setMenu] = useState<Menu>()
     const [selectMenuSection, setSelectMenuSection] = useState<Section>()
     const [selectedItem, setSelectedItem] = useState<Item>()
     const [openSections, setOpenSections] = useState<string[]>([]);
+    const [resultQuery, setResultQuery] = useState<Item[]>([]);
     const itemsCart = useAppSelector((state) => state.cart.items);
     const dispatch = useDispatch()
 
@@ -36,11 +38,17 @@ export const useMenu = () => {
     }, [])
 
     const handleAddToCart = (item: Item) => {
-        dispatch(addToCart({
-            item,
-            total: item.price,
-            quantity: 1
-        }))
+        const screenWidth = window.innerWidth
+        if(screenWidth > 1024){
+            dispatch(addToCart({
+                item,
+                total: item.price,
+                quantity: 1
+            }))
+        }else{
+            setShowModalItem(!showModalItem)
+            item && setSelectedItem(item)
+        }
     }
 
     const toggleSection = (sectionName: string) => {
@@ -59,6 +67,21 @@ export const useMenu = () => {
         }
     }
 
+    const handleSearch = (value: string) => {
+        const lowerCaseQuery = value.toLowerCase();
+
+        if(menu?.sections && value.length > 0){
+            const results = menu?.sections.flatMap(section => 
+                section.items.filter(item => 
+                    item.name.toLowerCase().includes(lowerCaseQuery)
+                )
+            );
+            setResultQuery(results);
+        }else{
+            setResultQuery([])
+        }
+    }
+
 
 
     return {
@@ -73,6 +96,8 @@ export const useMenu = () => {
         toggleSection,
         openSections,
         handleCloseOrOpenModalBasket,
-        showModalBasket
+        showModalBasket,
+        handleSearch,
+        resultQuery,
     }
 }

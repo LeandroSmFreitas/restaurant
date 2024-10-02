@@ -20,7 +20,7 @@ i18n
   .use(LanguageDetector)
   .init({
     resources,
-    lng: "pt-BR",
+    lng: "en-US",
     debug: false,
     interpolation: {
       escapeValue: false,

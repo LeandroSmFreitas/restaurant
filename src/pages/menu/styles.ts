@@ -103,9 +103,9 @@ export const ContainerTotalCard = styled.div`
 `
 
 export const TotalCart = styled.span`
-    font-family: SF Pro Display;
+    font-family: Roboto;
     font-size: 24px;
-    font-weight: 300;
+    font-weight: 700;
     line-height: 28.64px;
     text-align: left;
 `

@@ -1,8 +1,26 @@
 {
   "global": {
+    "search": {
+      "placeholder": "Search for item"
+    }
   },
   "header": {
+    "menu": "Menu",
+    "enter": "Enter",
+    "contact": "Contact"
   },
-  "generic": {
+  "basket": {
+    "title": "Basket",
+    "empty": "Your basket is empty",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "yourBasket": "Your basket"
+  },
+  "selectItem": {
+    "size": {
+      "title": "Choose your size",
+      "oneOption": "Select 1 option"
+    },
+    "addToBasket": "Add to basket"
   }
 }

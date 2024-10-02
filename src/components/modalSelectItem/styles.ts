@@ -8,24 +8,30 @@ interface PlusAndDeductButtonProps{
     isPlus?: boolean;
 }
 
-export const Container = styled.div`
+interface ModalBody {
+    withoutImage: boolean;
+}
+
+export const Container = styled.div<ModalBody>`
     width: 100vw;
     min-height: 100vh;
     background-color: #000000A6;
     display: flex;
     justify-content: center;
+    align-items: ${({ withoutImage }) => withoutImage ? "flex-end" : "none"};
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
 `
 
-export const ContainerModalBody = styled.div`
+export const ContainerModalBody = styled.div<ModalBody>`
     width: 480px;
     height: 720px;
     margin-top: 63px;
     @media screen and (max-width: 640px) {
         width: 100%;
-        min-height: 100vh;
+        min-height: ${({ withoutImage }) => withoutImage ? "284px" : "100vh"};
+        max-height: ${({ withoutImage }) => withoutImage ? "284px" : "none"};
         margin-top: 0px;
         background-color: white;
     }
@@ -38,7 +44,8 @@ export const ContainerMenuItemImage = styled.div<ImageProps>`
     background-size: cover;
     display: flex;
     justify-content: flex-end;
-    padding: 18px 0px 0px 0px;
+    padding: 30px 16px 0px 0px;
+    box-sizing: border-box;
 
     @media screen and (max-width: 490px) {
         background-size: contain;
@@ -269,6 +276,12 @@ export const TitleAddToCardButton = styled.span`
     letter-spacing: 0.75px;
     text-align: center;
     color: white;
+`
+
+export const Row = styled.div`
+    display: flex;
+    justify-content: space-between;
+
 `
 
 
