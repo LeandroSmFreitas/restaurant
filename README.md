@@ -1,50 +1,44 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# QikServe challenge - Leandro Simões
 
-Currently, two official plugins are available:
+I want to express my sincere gratitude for the opportunity to participate in the developer assessment. It has been a valuable experience for me to showcase my skills and knowledge in this area. I appreciate the chance to demonstrate my abilities. Thank you once again for your consideration. I look forward to the possibility of working together.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Project Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+In this project, I utilized several powerful technologies to create a dynamic and responsive application.
 
-- Configure the top-level `parserOptions` property like this:
+	•	React: I built the user interface using React, which allowed for the development of reusable components and efficient rendering of the UI.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+	•	Styled-Components: To enhance the styling of the application, I implemented Styled-Components. This approach allowed for writing actual CSS code to style components, making it easier to maintain and scale the design.
+
+	•	i18n: For internationalization, I integrated i18n, enabling the application to support multiple languages and providing a seamless experience for users around the globe.
+
+	•	Axios: For making HTTP requests, I used Axios. This library simplified the process of fetching and sending data to external APIs, ensuring efficient communication between the client and server.
+
+	•	Redux: To manage the application state, I implemented Redux. This allowed for a centralized store that maintains the state of the application, making it easier to track changes and manage complex state interactions.
+    
+	•	Vercel Speed Insights: To optimize performance, I employed Vercel’s tool for Speed Insights. This provided valuable insights into the application’s loading speed and overall performance, allowing for targeted improvements.
+
+
+## Project Performance
+
+![App Screenshot](assets/performance.png)
+
+
+## Getting Started
+
+Install dependencies:
+
+```bash
+  yarn
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+```bash
+  change path of api to /api/challenge
+```
+Development mode:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+  yarn dev
 ```
