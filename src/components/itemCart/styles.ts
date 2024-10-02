@@ -7,6 +7,9 @@ export const Container = styled.div`
     flex-direction: column;
     background-color: #fff;
     padding-top: 10px;
+    @media screen and (max-width: 1024px) {
+        box-sizing: border-box;
+    }
 `
 
 export const ContainerTitleAndPrice = styled.div`
@@ -14,6 +17,9 @@ export const ContainerTitleAndPrice = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+    @media screen and (max-width: 1024px) {
+        margin-top: 8px;
+    }
 `
 
 export const Title = styled.span`
@@ -33,6 +39,9 @@ export const Price = styled.span`
     letter-spacing: 0.5px;
     text-align: right;
     margin-right: 16px;
+    @media screen and (max-width: 1024px) {
+        margin-right: 32px;
+    }
 `
 
 export const Modifier = styled.span`
@@ -50,6 +59,9 @@ export const ContainerIncrement = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-left: 16px;
+    @media screen and (max-width: 1024px) {
+        margin-bottom: 20px;
+    }
 `
 
 export const PlusAndDeductButton = styled.button`

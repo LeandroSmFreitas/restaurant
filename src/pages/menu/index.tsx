@@ -2,14 +2,30 @@ import Header from "../../components/header"
 import Search from "../../components/search"
 import * as S from "./styles"
 import ArrowUp from "../../assets/arrowUp.svg"
+import ArrowDown from "../../assets/arrowDown.svg"
 import MenuItem from "../../components/menuItem"
 import ModalSelectItem from "../../components/modalSelectItem"
 import { useMenu } from "./hooks/menu-hook"
 import { ItemCartToBuy } from "../../components/itemCart"
+import React from "react"
+import ModalBasket from "../../components/modalBasket"
 
 
 const MenuPage = () => {
-    const { showModal, handleCloseOrOpenModal, menu, setSelectMenuSection, selectedItem, itemsCart, handleAddToCart } = useMenu();
+    const { 
+        showModalItem, 
+        handleCloseOrOpenModal, 
+        menu, 
+        handleSelectMenuSection, 
+        selectMenuSection, 
+        selectedItem, 
+        itemsCart, 
+        handleAddToCart, 
+        toggleSection, 
+        openSections,
+        showModalBasket,
+        handleCloseOrOpenModalBasket 
+    } = useMenu();
     
   return (
     <>
@@ -22,8 +38,8 @@ const MenuPage = () => {
                         {
                             menu?.sections.map(element => {
                                 return (
-                                    <S.ButtonMenuOption onClick={() => setSelectMenuSection(element)} style={{borderBottomWidth: "3px", borderBottomStyle: "solid", borderBottomColor: "#4f372F"}}>
-                                        <S.ImageOption src={element.images[0].image}/>
+                                    <S.ButtonMenuOption onClick={() => handleSelectMenuSection(element)} isSelected={selectMenuSection?.name === element.name}>
+                                        <S.ImageOption src={element.images[0].image} isSelected={selectMenuSection?.name === element.name}/>
                                         <S.ContainerTitleMenuOption>
                                             <S.TitleMenuOption>{element.name}</S.TitleMenuOption>
                                         </S.ContainerTitleMenuOption>
@@ -33,25 +49,57 @@ const MenuPage = () => {
                         }
                     </S.ContainerMenuOptions>
                     <S.ContainerSections>
-                        {
-                            menu?.sections.map(sections => {
-                                return (
-                                    <>
-                                    <S.ContainerSection>
-                                        <S.TitleSection>{sections?.name}</S.TitleSection>
-                                        <S.Icon src={ArrowUp}/>
-                                    </S.ContainerSection>
-                                    {
-                                        sections?.items.map(element => {
-                                            return (
-                                                <MenuItem openModal={() => element.images ? handleCloseOrOpenModal(element) : handleAddToCart(element)} item={element}/>
-                                            )
-                                        })
-                                    }
-                                    </>
-                                )
-                            }) 
-                        }
+                        {menu?.sections.map((section) => (
+                            <React.Fragment>
+                                {
+                                    selectMenuSection?.name === section.name ? (
+                                        <React.Fragment key={section.name}>
+                                            <S.ContainerSection onClick={() => toggleSection(section.name)}>
+                                                <S.TitleSection>{section?.name}</S.TitleSection>
+                                                <S.Icon src={openSections.includes(section.name) ? ArrowUp : ArrowDown} /> {/* Muda o ícone dependendo se a seção está aberta ou fechada */}
+                                            </S.ContainerSection>
+
+                                            {openSections.includes(section.name) && (
+                                                section?.items.map((element) => (
+                                                <MenuItem
+                                                    key={element.id}
+                                                    openModal={() =>
+                                                    element.images
+                                                        ? handleCloseOrOpenModal(element)
+                                                        : handleAddToCart(element)
+                                                    }
+                                                    item={element}
+                                                />
+                                                ))
+                                            )}
+                                        </React.Fragment>
+                                    )
+                                    : 
+                                    selectMenuSection === undefined &&
+                                    <React.Fragment key={section.name}>
+                                        <S.ContainerSection onClick={() => toggleSection(section.name)}>
+                                            <S.TitleSection>{section?.name}</S.TitleSection>
+                                            <S.Icon src={openSections.includes(section.name) ? ArrowUp : ArrowDown} /> {/* Muda o ícone dependendo se a seção está aberta ou fechada */}
+                                        </S.ContainerSection>
+
+                                        {openSections.includes(section.name) && (
+                                            section?.items.map((element) => (
+                                            <MenuItem
+                                                key={element.id}
+                                                openModal={() =>
+                                                element.images
+                                                    ? handleCloseOrOpenModal(element)
+                                                    : handleAddToCart(element)
+                                                }
+                                                item={element}
+                                            />
+                                            ))
+                                        )}
+                                    </React.Fragment>
+                                }
+                                
+                            </React.Fragment>
+                        ))}
                     </S.ContainerSections>
                 </S.ContainerMenu>
                 <S.ContainerCard>
@@ -82,9 +130,15 @@ const MenuPage = () => {
                     }
                 </S.ContainerCard>
             </S.ContainerMenuAndCart>
+            <S.BasketButton onClick={() => handleCloseOrOpenModalBasket()}>
+                <S.TitleBasketButton>Your basket • {itemsCart.length} item</S.TitleBasketButton>
+            </S.BasketButton>
         </S.Container>
         {
-            showModal && selectedItem && <ModalSelectItem closeModal={() => handleCloseOrOpenModal(selectedItem)} item={selectedItem}/>
+            showModalItem && selectedItem && <ModalSelectItem closeModal={() => handleCloseOrOpenModal(selectedItem)} item={selectedItem}/>
+        }
+        {
+            showModalBasket && <ModalBasket onClose={handleCloseOrOpenModalBasket}/>
         }
     </>
   )

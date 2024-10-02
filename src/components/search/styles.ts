@@ -9,6 +9,10 @@ export const Container = styled.div`
     border-radius: 8px;
     border: 1px solid #8A94A4;
     background-color: white;
+
+    @media screen and (max-width: 1023px) {
+        width: 90%;
+    }
 `
 
 export const Icon = styled.img`

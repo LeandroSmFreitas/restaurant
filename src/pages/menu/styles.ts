@@ -1,11 +1,18 @@
 import styled from "styled-components";
 
+interface MenuOption{
+    isSelected: boolean;
+}
+
 export const Container = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 12px;
+    padding-top: 12px;
+    @media screen and (max-width: 1023px) {
+        background-color: white;
+    }
 `
 
 export const ContainerMenuAndCart = styled.div`
@@ -15,6 +22,13 @@ export const ContainerMenuAndCart = styled.div`
     margin-top: 6px;
     display: flex;
     padding-top: 32px;
+    @media screen and (max-width: 1023px) {
+        width: 100%;
+        background-color: white;
+        min-height: auto;
+        height: auto;
+        max-height: auto;
+    }
 `
 
 export const ContainerMenu = styled.div`
@@ -23,6 +37,14 @@ export const ContainerMenu = styled.div`
     padding: 0px 0px 24px 0px;
     margin: 0px 24px 0px 40px;
     background-color: #fff;
+    @media screen and (max-width: 1023px) {
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+    }
+    @media screen and (max-width: 1023px) {
+        display: flex;
+        flex-direction: column;
+    }
 `
 
 export const ContainerCard = styled.div`
@@ -33,6 +55,10 @@ export const ContainerCard = styled.div`
     flex-direction: column;
     box-shadow: 0px 2px 14px 0px #00000026;
     flex-grow: 0;
+
+    @media screen and (max-width: 1023px) {
+        display: none;
+    }
 `
 
 export const ContainerTitleCard = styled.div`
@@ -107,9 +133,17 @@ export const ContainerMenuOptions = styled.div`
     align-items: center;
     padding: 20px 0px 24px 16px;
     box-sizing: border-box;
+    @media screen and (max-width: 1023px) {
+        padding-bottom: 0px;
+    }
+
+    @media screen and (max-width: 370px) {
+        width: 95%;
+        padding: 0px 0px 0px 0px;
+    }
 `
 
-export const ButtonMenuOption = styled.button`
+export const ButtonMenuOption = styled.button<MenuOption>`
     width: 104px;
     height: 146px;
     display: flex;
@@ -120,15 +154,19 @@ export const ButtonMenuOption = styled.button`
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    border-bottom-width: ${({ isSelected }) => isSelected ? "3px" : "none"};
+    border-bottom-style: ${({ isSelected }) => isSelected ? "solid" : "none"};
+    border-bottom-color: ${({ isSelected }) => isSelected ? "#4f372F" : "none"};
 `
 
-export const ImageOption = styled.img`
+export const ImageOption = styled.img<MenuOption>`
     width: 82px;
     height: 82px;
     border-radius: 50px;
-    border: 2px solid #4F372F;
-    padding: 4px;
+    border: ${({ isSelected }) => isSelected ? "2px solid #4F372F" : "none"};
+    padding: 2px;
     box-sizing: border-box;
+    object-fit: cover;
     scale: crop;
 `
 
@@ -158,6 +196,9 @@ export const ContainerSection = styled.section`
     padding: 32px 16px 12px 16px;
     box-sizing: border-box;
     cursor: pointer;
+    @media screen and (max-width: 1023px) {
+        padding: 16px 0px 16px 0px;
+    }
 `
 
 export const TitleSection = styled.span`
@@ -176,20 +217,59 @@ export const Icon = styled.img`
 
 
 export const ContainerSections = styled.div`
-  display: flex;
-  flex-direction: column;
-  overflow-x: auto;  /* Habilita o scroll horizontal */
-  white-space: nowrap;  /* Garante que os itens fiquem em uma linha horizontal */
-  width: 100%;  /* Controla o tamanho do container para evitar que ele quebre a linha */
-  height: 890px;
-  /* Estilo opcional para personalizar a barra de rolagem */
-  &::-webkit-scrollbar {
-    height: 8px;  /* Altura da barra de rolagem horizontal */
-  }
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    height: 890px;
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
 
-  &::-webkit-scrollbar-thumb {
-    background: #ccc;  /* Cor da barra */
-    border-radius: 4px;
-  }
+    &::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
+    }
+    @media screen and (max-width: 1023px) {
+        width: 90%;
+        padding: 0px 0px 0px 16px;
+    }
+
 `;
+
+export const BasketButton = styled.button`
+    display: none;
+    @media screen and (max-width: 1024px) {
+        width: 512px;
+        height: 48px;
+        padding: 4px 24px 4px 24px;
+        border-radius: 40px;
+        background-color: #4F372F;
+        margin-top: 10px;
+        cursor: pointer;
+        bottom: 24px;
+        display: flex;
+        border: none;
+        position: fixed;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        bottom: 40px;
+    }
+
+    @media screen and (max-width: 520px) {
+        width: 90%;
+    }
+`
+
+export const TitleBasketButton = styled.span`
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21.09px;
+    letter-spacing: 0.75px;
+    text-align: center;
+    color: white;
+`
 

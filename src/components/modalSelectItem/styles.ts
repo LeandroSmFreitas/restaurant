@@ -10,7 +10,7 @@ interface PlusAndDeductButtonProps{
 
 export const Container = styled.div`
     width: 100vw;
-    min-height: 100%;
+    min-height: 100vh;
     background-color: #000000A6;
     display: flex;
     justify-content: center;
@@ -23,17 +23,30 @@ export const ContainerModalBody = styled.div`
     width: 480px;
     height: 720px;
     margin-top: 63px;
+    @media screen and (max-width: 640px) {
+        width: 100%;
+        min-height: 100vh;
+        margin-top: 0px;
+        background-color: white;
+    }
 `
 
 export const ContainerMenuItemImage = styled.div<ImageProps>`
     width: 100%;
-    height: 320px;
+    min-height: 320px;
     background-image: ${({ url }) => `url(${url})`};
     background-size: cover;
     display: flex;
     justify-content: flex-end;
-    padding: 18px 16px 0px 0px;
-    box-sizing: border-box;
+    padding: 18px 0px 0px 0px;
+
+    @media screen and (max-width: 490px) {
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    @media screen and (max-width: 401px) {
+       min-height: 250px;
+    }
 `
 
 export const CloseIcon = styled.img`
@@ -195,6 +208,10 @@ export const ContainerFooterModal = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media screen and (max-width: 640px) {
+        position: absolute;
+        bottom: 0;
+    }
 `
 
 export const ContainerIncrement = styled.div`
@@ -239,6 +256,9 @@ export const AddToCardButton = styled.button`
     background-color: #4F372F;
     margin-top: 10px;
     cursor: pointer;
+    @media screen and (max-width: 640px) {
+        width: 90%;
+    }
 `
 
 export const TitleAddToCardButton = styled.span`

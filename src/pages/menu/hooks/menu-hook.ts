@@ -7,10 +7,12 @@ import { addToCart } from "../../../store/cart/reducer"
 
 
 export const useMenu = () => {
-    const [showModal, setShowModal] = useState(false)
+    const [showModalItem, setShowModalItem] = useState(false)
+    const [showModalBasket, setShowModalBasket] = useState(false)
     const [menu, setMenu] = useState<Menu>()
     const [selectMenuSection, setSelectMenuSection] = useState<Section>()
     const [selectedItem, setSelectedItem] = useState<Item>()
+    const [openSections, setOpenSections] = useState<string[]>([]);
     const itemsCart = useAppSelector((state) => state.cart.items);
     const dispatch = useDispatch()
 
@@ -18,7 +20,11 @@ export const useMenu = () => {
         if(item){
             setSelectedItem(item)
         }
-        setShowModal(!showModal)
+        setShowModalItem(!showModalItem)
+    }
+
+    const handleCloseOrOpenModalBasket = () => {
+        setShowModalBasket(!showModalBasket)
     }
 
     useEffect(() => {
@@ -37,14 +43,36 @@ export const useMenu = () => {
         }))
     }
 
+    const toggleSection = (sectionName: string) => {
+        if (openSections.includes(sectionName)) {
+          setOpenSections(openSections.filter(name => name !== sectionName));
+        } else {
+          setOpenSections([...openSections, sectionName]);
+        }
+    };
+    
+    const handleSelectMenuSection = (value: Section) => {
+        if(selectMenuSection?.name === value.name){
+            setSelectMenuSection(undefined)
+        }else{
+            setSelectMenuSection(value)
+        }
+    }
+
+
+
     return {
         handleCloseOrOpenModal,
-        showModal,
+        showModalItem,
         menu,
-        setSelectMenuSection,
+        handleSelectMenuSection,
         selectMenuSection,
         selectedItem,
         itemsCart,
-        handleAddToCart
+        handleAddToCart,
+        toggleSection,
+        openSections,
+        handleCloseOrOpenModalBasket,
+        showModalBasket
     }
 }

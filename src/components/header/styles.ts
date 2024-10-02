@@ -2,9 +2,29 @@ import styled from "styled-components";
 
 
 export const Container = styled.header`
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: column;
+`
+
+export const HamburgerMenu = styled.div`
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto; 
+    cursor: pointer;
+    color: white;
+  }
+`;
+
+export const HamburgerIcon = styled.img`
+    width: 12px;
+    height: 12px;
+    justify-self: flex-end;
+    margin-right: 22px;
+    align-self: center;
 `
 
 export const ContainerMenus = styled.div`
@@ -18,6 +38,9 @@ export const ContainerMenus = styled.div`
 
 export const ContainerButtons = styled.nav`
     display: flex;
+    @media screen and (max-width: 768px) {
+        display: none;
+  }
 `
 
 export const HeaderButton = styled.button`
@@ -31,7 +54,7 @@ export const HeaderButton = styled.button`
     cursor: pointer;
 `
 
-export const TitleButton = styled.span`
+export const TitlePage = styled.span`
     font-family: Roboto;
     font-size: 20px;
     font-weight: 400;
@@ -44,4 +67,5 @@ export const TitleButton = styled.span`
 export const Logo = styled.img`
     width: 100%;
     height: 150px;
+    object-fit: cover;
 `
