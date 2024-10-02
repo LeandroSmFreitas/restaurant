@@ -9,7 +9,7 @@ interface Props{
 }
 
 const MenuItem = ({ openModal, item }:Props) => {
-  const { showValueInBasket } = UseMenuItem({ item })
+  const { showValueInBasket } = UseMenuItem()
 
   return (
     <S.Container onClick={openModal}>
