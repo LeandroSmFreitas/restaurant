@@ -12,7 +12,7 @@ const themeSlice = createSlice({
   initialState: {} as Venue,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchTheme.fulfilled, (state, action) => {
+    builder.addCase(fetchTheme.fulfilled, (_, action) => {
       return action.payload;
     });
   },
