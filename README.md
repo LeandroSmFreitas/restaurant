@@ -23,7 +23,7 @@ In this project, I utilized several powerful technologies to create a dynamic an
 
 ## Project Performance
 
-![App Screenshot](assets/performance.png)
+![App Screenshot](src/assets/performance.png)
 
 
 ## Getting Started
