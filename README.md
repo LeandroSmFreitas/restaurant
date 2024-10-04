@@ -34,9 +34,6 @@ Install dependencies:
   yarn
 ```
 
-```bash
-  change path of api to /api/challenge
-```
 Development mode:
 
 ```bash
