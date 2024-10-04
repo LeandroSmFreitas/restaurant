@@ -1,9 +1,11 @@
 import * as S from "./styles"
 import Hamburguer from '../../assets/hamburger.svg'
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/store";
 
 const Header = () => {
   const { t } = useTranslation();
+  const theme = useAppSelector((state) => state.theme);
 
   return (
     <S.Container>
@@ -24,7 +26,7 @@ const Header = () => {
             </S.HeaderButton>
             </S.ContainerButtons>
         </S.ContainerMenus>
-        <S.Logo src="https://preodemo.gumlet.io/usr/venue/7602/web/646fbf3abf9d0.png"/>
+        <S.Logo src={theme.webSettings.bannerImage}/>
     </S.Container>
   )
 }

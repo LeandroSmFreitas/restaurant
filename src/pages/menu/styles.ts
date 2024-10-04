@@ -156,7 +156,7 @@ export const ButtonMenuOption = styled.button<MenuOption>`
     cursor: pointer;
     border-bottom-width: ${({ isSelected }) => isSelected ? "3px" : "none"};
     border-bottom-style: ${({ isSelected }) => isSelected ? "solid" : "none"};
-    border-bottom-color: ${({ isSelected }) => isSelected ? "#4f372F" : "none"};
+    border-bottom-color: ${({ isSelected, theme }) => isSelected ? theme.webSettings.primaryColour : "none"};
 `
 
 export const ImageOption = styled.img<MenuOption>`
@@ -245,7 +245,7 @@ export const BasketButton = styled.button`
         height: 48px;
         padding: 4px 24px 4px 24px;
         border-radius: 40px;
-        background-color: #4F372F;
+        background-color: ${({ theme }) => theme.webSettings.primaryColour};
         margin-top: 10px;
         cursor: pointer;
         bottom: 24px;

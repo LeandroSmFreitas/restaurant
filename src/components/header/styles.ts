@@ -30,7 +30,7 @@ export const HamburgerIcon = styled.img`
 export const ContainerMenus = styled.div`
     width: 100%;
     height: 52px;
-    background-color: #4F372F;
+    background-color: ${({ theme }) => theme.webSettings.navBackgroundColour};
     display: flex;
     justify-content: center;
     align-items: center;

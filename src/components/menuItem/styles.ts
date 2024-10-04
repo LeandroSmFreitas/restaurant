@@ -39,7 +39,7 @@ export const ContainerValueInBasket = styled.div`
     width: 18px;
     height: 18px;
     border-radius: 4px;
-    background-color: #4F372F;
+    background-color: ${({ theme }) => theme.webSettings.primaryColour};
     margin-right: 8px;
     display: flex;
     justify-content: center;
